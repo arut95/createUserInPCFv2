@@ -1,0 +1,165 @@
+{
+	"variables": [],
+	"info": {
+		"name": "paltest",
+		"_postman_id": "7b43f053-c80a-3e1a-7f15-bf288b6d755b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Form1_RegisterUser",
+			"request": {
+				"url": "palusersdev.app.dev.digifabricpcf.com/UserManagement/RegisterUser",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\":\"cts\",\n\t\"lastName\":\"ctslast\",\n\t\"employeeId\":5456454,\n\t\"employeeEmailId\":\"hello.jothikrishnan@cognizant.com\",\n\t\"supervisorEmailId\":\"arun.jothikrishnan@cognizant.com\",\n\t\"department\":\"CTS\",\n\t\"progLanguage\":\"DOTNET\",\n\t\"proficiencylevel\":\"p1\",\n\t\"frameworks\":\"f1\",\n\t\"linuxskill\":\"l1\",\n\t\"fullstackcompleted\":\"fs\",\n\t\"fullstackskills\":\"fsk\",\n\t\"userthoughtstraning\":\"ut\",\n\t\"usercommentstraining\":\"tc\",\n\t\"phoneNumber\":12353,\n\t\"uniqueid\":\"734851\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Form2_CreateUser",
+			"request": {
+				"url": "palusersdev.app.dev.digifabricpcf.com/UserManagement/CreateUser",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employeeEmailId\":\"hello.jothikrishnan@cognizant.com\",\n\t\"uniqueid\":\"a9069e4\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsers From UserEntity",
+			"request": {
+				"url": "palusers-mvp2.app.dev.digifabricpcf.com/UserManagement/GetAllUsers",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser using Id",
+			"request": {
+				"url": " palusers-mvp2.app.dev.digifabricpcf.com/UserManagement/DeleteUser/4",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\":\"cts\",\n\t\"lastName\":\"ctslast\",\n\t\"employeeId\":5456454,\n\t\"employeeEmailId\":\"arun.jothikrishnan@cognizant.com\",\n\t\"supervisorEmailId\":\"Rangarajan.Ramadass@cognizant.com\",\n\t\"department\":\"CTS\",\n\t\"progLanguage\":\"DOTNET\",\n\t\"proficiencylevel\":\"p1\",\n\t\"frameworks\":\"f1\",\n\t\"linuxskill\":\"l1\",\n\t\"fullstackcompleted\":\"fs\",\n\t\"fullstackskills\":\"fsk\",\n\t\"userthoughtstraning\":\"ut\",\n\t\"usercommentstraining\":\"tc\",\n\t\"phoneNumber\":12353,\n\t\"uniqueid\":\"734851\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Encrypt a Value",
+			"request": {
+				"url": "http://palusersconfigserver.apps.cumuluslabs.io/encrypt",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcnM6Y3RzczNjcjN0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "6a435e50726cf070254d548a39aecd73deabf9bc30121acef99412acf153f091"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmails from EmailEntity",
+			"request": {
+				"url": " palemailscheduler.app.dev.digifabricpcf.com/GetEmails",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Insert data into UserEntity directly",
+			"request": {
+				"url": "palusers-mvp2.app.dev.digifabricpcf.com/Users/RegisterUser",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cGFsdXNlcjpTaW1wbGU0dSE=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 67,\r\n        \"firstname\": \"Saranya Palanisamy\",\r\n        \"lastname\": \"\",\r\n        \"employeeid\": 467616,\r\n        \"employeeemailid\": \"Saranya.Palanisamy4@cognizant.com\",\r\n        \"supervisoremailid\": \"karthiha.k@cognizant.com\",\r\n        \"department\": \"CDE - Cloud Lift\",\r\n        \"proglanguage\": \"JAVA\",\r\n        \"phonenumber\": \"12353\",\r\n        \"timezone\": \"Coordinated Universal Time\",\r\n        \"uniqueid\": \"a1bad34\",\r\n        \"activationstatus\": \"NOTACTIVATED\",\r\n        \"activationdate\": null,\r\n        \"creationdate\": \"2017-10-29 06:13:05\" ,\r\n        \"lastmodifieddate\": null,\r\n        \"numberofattempts\": 0,\r\n        \"orgid\": null,\r\n        \"proficiencylevel\": \"Beginner\",\r\n        \"frameworks\": \"Java EE\",\r\n        \"linuxskill\": \"Intermediate\",\r\n        \"fullstackcompleted\": \"No\",\r\n        \"fullstackskills\": \"Node,MongoDB\",\r\n        \"userthoughtstraning\": \"Yes, very useful. Will come to know about cloud foundry in detail.\",\r\n        \"usercommentstraining\": \"From Manager\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: pallet/git-client
+
+inputs:
+  - name: appsourcecode
+
+outputs:
+  - name: email-content
+  
+run:
+ path: sh
+ args: ["appsourcecode/ci/tasks/build-fail-email-content.sh"]

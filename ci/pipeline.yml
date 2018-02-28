@@ -1,0 +1,123 @@
+# Docker image resource type for email notification
+resource_types:
+# Email service resource
+- name: email
+  type: docker-image
+  source:
+    repository: pcfseceng/email-resource
+# CF-CLI resource type
+- name: cf-cli
+  type: docker-image
+  source:
+    repository: pivotalpa/cf-cli-resource
+    tag: latest    
+resources:
+- name: appsourcecode
+  type: git
+  source:
+    uri: {{git-configurl}} 
+    username: {{git-username}}
+    password: {{git-password}}
+    branch: master
+
+- name: deployapp
+  type: cf
+  source:
+    api: {{cf-apiendpoint}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}
+    skip_cert_check: true
+- name: cli
+  type: cf-cli
+  source:
+    api: {{cf-apiendpoint}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    org: {{cf-organization}}
+    space: {{cf-space}}
+    skip_cert_check: true    
+- name: notification
+  type: email
+  source:
+    smtp:
+      host: {{email-host}}
+      port: {{email-port}}
+      username: {{email-username}}
+      password: {{email-password}}
+    from: {{email-from}}
+    to: [{{email-to}}]
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: appsourcecode
+  - task: package  
+    config:
+      platform: linux
+      inputs:
+      - name: appsourcecode
+      outputs:
+      - name: jarFile
+      image_resource:
+        type: docker-image
+        source: 
+          repository: maven
+          tag: latest
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          export TERM=dumb
+          cd appsourcecode
+          mvn clean install -e -DskipTests=true 
+          cd target
+          mv *.jar ../../jarFile/palconfigserver.jar
+          cd ../../jarFile
+          cd .. 
+    on_failure:
+      do:
+      - task: email-content
+        file: appsourcecode/ci/tasks/git-client-build-fail.yml
+      - put: notification
+        params:
+          subject: email-content/subject.txt
+          body: email-content/body.txt    
+  - put: cf-create-service
+    resource: cli
+    params:
+      command: create-service
+      service: p-mysql
+      plan: 100mb
+      service_instance: {{cf-mysql-name}}
+      timeout: 300
+      wait_for_service: true
+    on_failure:
+      do:
+      - put: notification
+        params:
+          subject_text: "p-mysql ERROR"
+          body_text: "p-mysql instance creation failed"                    
+  - put: deployapp
+    params:
+      manifest: appsourcecode/manifest.yml
+      path: jarFile/palconfigserver.jar   
+    on_success:
+      do:
+      - task: email-content
+        file: appsourcecode/ci/tasks/git-client-deploy-success.yml
+      - put: notification
+        params:
+          subject: email-content/subject.txt
+          body: email-content/body.txt  
+    on_failure:
+      do:
+      - task: email-content
+        file: appsourcecode/ci/tasks/git-client-deploy-fail.yml
+      - put: notification
+        params:
+          subject: email-content/subject.txt
+          body: email-content/body.txt

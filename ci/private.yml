@@ -1,0 +1,15 @@
+git-username: 
+git-password: 
+git-configurl: https://github.com/TheCognizantFoundry/PCF_Enablement.git
+cf-username: pcfadmin
+cf-password: 
+cf-organization: arundev
+cf-space: configspace
+cf-apiendpoint: https://api.system.dev.digifabricpcf.com
+email-username: awsdigifoundry@gmail.com
+email-password: 
+email-host: smtp.gmail.com
+email-port: "587"
+email-from: awsdigifoundry@gmail.com
+email-to: "awsdigifoundry@gmail.com"
+cf-mysql-name: palmysql-mvp2
