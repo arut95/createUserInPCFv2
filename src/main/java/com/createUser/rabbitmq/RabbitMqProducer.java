@@ -18,7 +18,8 @@ public class RabbitMqProducer {
     }    
     
     @Scheduled(fixedRate = 10000)
-    public void sendJSONMessage() {
+    public void sendJSONMessage(UserMailEntity userInfo) {
+    	/*
     		UserMailEntity userInfo = new UserMailEntity();
 	    userInfo.setApiEndpointURL("digifabricpcf.com");
 	    userInfo.setAppsManagerURL("AppsManager");
@@ -27,6 +28,7 @@ public class RabbitMqProducer {
 	    userInfo.setSpaceName("sandbox");
 	    userInfo.setSubject("Account Creation for PCF");
 	    userInfo.setUsername("Arutsudar.A@cognizant.com");
+	    */
 	    this.template.convertAndSend("usermail-queue", userInfo);
 		System.out.println("Send msg = " + userInfo);
     }
