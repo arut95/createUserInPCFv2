@@ -171,7 +171,7 @@ public class createUser {
 
 													if(mailOption==1)
 													{
-														saveAccountEmail(username,accountcreationemailsubject,"User account created",password,true);
+														//saveAccountEmail(username,accountcreationemailsubject,"User account created",password,true);
 														logger.info("\nSaving Email for.." + username+"\n\n");
 														return "Created CF account for "+ username;
 													}
