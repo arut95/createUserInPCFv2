@@ -25,6 +25,8 @@ import com.createUser.domain.UAAEmailData;
 import com.createUser.domain.UAAUserData;
 import com.createUser.logger.ILogger;
 import com.createUser.logger.LoggerFactory;
+import com.createUser.rabbitmq.RabbitMqProducer;
+import com.createUser.rabbitmq.UserMailEntity;
 //import com.palusers.scheduler.ScheduledTasks;
 import com.createUser.services.CloudUserManageService;
 import com.createUser.services.EmailCreation;
@@ -38,6 +40,9 @@ public class createUser {
 
 	@Autowired
 	private EmailCreation emailTemplate; 
+	
+	@Autowired
+	private RabbitMqProducer rabbitMqProducer;
 	
 	@Value("${uaalogin}")
 	private String uaalogin;
@@ -55,6 +60,12 @@ public class createUser {
 	@Value("${oauthusername}")
 	private String oauthusername;
 
+	@Value("${appmanagerurl}")
+	private String appmanagerurl;
+	
+	@Value("${apiurl}")
+	private String apiurl;
+	
 	@Autowired
 	RestTemplate restTemplate; 
 /*
@@ -171,7 +182,18 @@ public class createUser {
 
 													if(mailOption==1)
 													{
-														saveAccountEmail(username,accountcreationemailsubject,"User account created",password,true);
+														UserMailEntity userMailEntity = new UserMailEntity();
+														
+														userMailEntity.setUsername(username);
+														userMailEntity.setPassword(password);
+														userMailEntity.setOrgName(orgName);
+														userMailEntity.setSpaceName(spacename);
+														userMailEntity.setApiEndpointURL(apiurl);
+														userMailEntity.setAppsManagerURL(appmanagerurl);
+														
+														rabbitMqProducer.sendJSONMessage(userMailEntity);
+														
+														//saveAccountEmail(username,accountcreationemailsubject,"User account created",password,true);
 														logger.info("\nSaving Email for.." + username+"\n\n");
 														return "Created CF account for "+ username;
 													}

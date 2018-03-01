@@ -10,5 +10,6 @@ public class CloudCFApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CloudCFApplication.class, args);
-	}
+	}	
+	
 }
