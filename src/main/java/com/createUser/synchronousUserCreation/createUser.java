@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,17 +30,15 @@ import com.createUser.rabbitmq.RabbitMqProducer;
 import com.createUser.rabbitmq.UserMailEntity;
 //import com.palusers.scheduler.ScheduledTasks;
 import com.createUser.services.CloudUserManageService;
-import com.createUser.services.EmailCreation;
 
+@CrossOrigin(origins = {"${cors1}","${cors2}"})
+@RefreshScope
 @RestController
 public class createUser {
 	
 	private String errorinAccCreation="Error has occurred in creating user. Account might exists.";
 
 	private static ILogger logger;	
-
-	@Autowired
-	private EmailCreation emailTemplate; 
 	
 	@Autowired
 	private RabbitMqProducer rabbitMqProducer;
@@ -49,7 +48,6 @@ public class createUser {
 
 	@Value("${uaacreateuser}")
 	private String uaacreateuser;
-
 	
 	@Value("${userpasswordlength}")
 	private String userpasswordlength;
@@ -68,10 +66,7 @@ public class createUser {
 	
 	@Autowired
 	RestTemplate restTemplate; 
-/*
-	@Autowired
-	private ScheduledTasks scheduledTasks; 
-	*/
+
 	@Autowired
 	private CloudUserManageService cloudUsrManageService;
 
@@ -88,14 +83,12 @@ public class createUser {
 		logger.error(adminMsg + username);		
 	}
 
-	@CrossOrigin(origins = "${corsUrl}")
 	@RequestMapping(value="/login")
 	public String loginCheck()
 	{
 		return "Success";
 	}
 	
-	@CrossOrigin(origins = "${corsUrl}")
 	@RequestMapping(value="/creatingUser/{email}/{batch}/{expiry}/{mailOptions}", method = RequestMethod.GET)
 	public String creatingUser(@PathVariable("email") String username,@PathVariable("batch") String tagName,@PathVariable("expiry") String expiryDate,@PathVariable("mailOptions") String mailOptions ) throws ParseException
 	{
@@ -183,7 +176,8 @@ public class createUser {
 													if(mailOption==1)
 													{
 														UserMailEntity userMailEntity = new UserMailEntity();
-														
+
+														userMailEntity.setSubject("reg - PCF access");
 														userMailEntity.setUsername(username);
 														userMailEntity.setPassword(password);
 														userMailEntity.setOrgName(orgName);
@@ -193,7 +187,6 @@ public class createUser {
 														
 														rabbitMqProducer.sendJSONMessage(userMailEntity);
 														
-														//saveAccountEmail(username,accountcreationemailsubject,"User account created",password,true);
 														logger.info("\nSaving Email for.." + username+"\n\n");
 														return "Created CF account for "+ username;
 													}
@@ -240,35 +233,6 @@ public class createUser {
 		
 		return "There was some error while creating user.";
 }
-	
-	private void saveAccountEmail(String username, String subject,String message,String password, boolean isSuccess)
-	{
-		try
-		{
-			EmailRequest emailData = new EmailRequest();
-			emailData.Recipient = username;
-			emailData.HCMRecipient = null;
-			emailData.Subject = subject;
-			emailData.Message = message;
-			emailData.Username = username;
-			emailData.Password = password;
-			//emailData.AppManagerUrl = appmanagerurl;
-			//emailData.ApiURL = apiurl;
-			if(isSuccess)
-				emailTemplate.sendAccountEmail(emailData);
-			else
-			{				
-				emailTemplate.sendErrorMail(emailData);
-				emailData.Message = message +" "+ username;
-				emailTemplate.sendSupportTeamMail(emailData);
-			}
-			logger.info("Email Saved for.." + username);			
-		}
-		catch(Exception ex)
-		{
-			logger.error(this.getClass().getName() + ": Error in saving email");			
-		}
-	}
 	
 
 	private String createUserInCF(String token,String username, String password)

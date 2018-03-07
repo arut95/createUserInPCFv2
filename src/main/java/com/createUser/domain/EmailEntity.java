@@ -2,64 +2,43 @@ package com.createUser.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-@Entity
-@Table(name="emailentity")
 
 public class EmailEntity implements Serializable{
 	
 	private static final long serialVersionUID = -3254406057751181181L;
 	
-	@Id
-    @GeneratedValue
     private Long id;
 	
-	@Column(name = "receipient")
 	private String receipient;
 	
-	@Column(name = "hcmreceipient")
 	private String hcmreceipient;
 	
-	@Column(name = "subject")
 	private String subject;
 	
-	@Column(name = "status")
 	private String status; 
 	
-	@Column(name = "creationdate")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date  creationdate;	
 	
-	@Column(name = "lastmodifieddate", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date  lastmodifieddate;
 	
-	@Column(name = "username")
 	private String username; 
 	
-	@Column(name = "password")
 	private String password; 
 	
-	@Column(name = "template")
 	private String template; 
 	
-	@Column(name = "track")
 	private String track; 
 	
-	@Column(name = "learningurl")
 	private String learningurl; 
 	
-	@Column(name = "uniqueid")
 	private String uniqueid; 
 	
-	@Column(name = "message")
 	private String message;
 	
 	public String getMessage() {

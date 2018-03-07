@@ -73,7 +73,6 @@ public class ManageUsers {
 			byte[] plainCredsBytes = plainCreds.getBytes();
 			byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
 			String base64Creds = new String(base64CredsBytes);
-	
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type", "application/x-www-form-urlencoded");
 			headers.add("Accept", "application/json");
@@ -81,16 +80,15 @@ public class ManageUsers {
 			
 			HttpEntity<String> request = new HttpEntity<String>(headers);
 			SSLCertificateValidation.disable();
-			
 			ResponseEntity<String> response = restTemplate.exchange(uaaloginurl, HttpMethod.POST, request, String.class);
 			logger.info("GetToken "+ response.getStatusCode());
 			if(response.getStatusCode() == HttpStatus.OK)
-			{
+			{			
 				JSONParser parser = new JSONParser();
 				Object obj = parser.parse(response.getBody());
 				JSONObject resultObj = (JSONObject) obj;
 				token = (String) resultObj.get(com.createUser.common.ApplicationConstants.ACCESS_TOKEN);
-			}
+			}			
 			return token;
 		}
 		catch(Exception ex)
@@ -327,7 +325,7 @@ public class ManageUsers {
 	public String getAuthToken(String username,String password,String grant_type) {
 		String accessToken =null;
 		try
-		{	
+		{
 			HttpHeaders headers = new HttpHeaders();			
 			headers.add("Authorization", "Basic Y2Y6");
 			HttpEntity<String> request = new HttpEntity<String>(headers);

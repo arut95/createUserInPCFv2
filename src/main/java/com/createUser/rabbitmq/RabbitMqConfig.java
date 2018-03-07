@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 	
-    @Bean
+   @Bean
     Queue queueJson() {
     	return new Queue("usermail-queue", false);
     }

@@ -1,12 +1,10 @@
 ---
 applications:
-- name: PCF_Enablement
+- name: CreateUserInPCF
   memory: 1G
   instances: 1     
-  services: [myCloudDB]
+  services: [mysqldb,Create-user-in-PCF_Config,rabbitmqService]
   env:
-   configserverurl: https://palusersconfigservers1.app.dev.digifabricpcf.com/
-
    activeprofile: dev
-  path: ./target/createUser-0.0.1-SNAPSHOT.jar
+  path: ./target/createUserInPCF-0.0.1-SNAPSHOT.jar
 

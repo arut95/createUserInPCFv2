@@ -72,7 +72,7 @@ public class UserControllerTest {
 			+ result.getResponse().getContentAsString());
 			assertNotNull(result.getResponse().getContentAsString());
 		}
-	
+/*	
 	@Test
 	public void emailComparision() throws Exception {
 			MvcResult result = this.mockMvc
@@ -128,4 +128,5 @@ public class UserControllerTest {
 			+ result.getResponse().getContentAsString());
 			assertNotNull(result.getResponse().getContentAsString());
 		}
+*/		
 }

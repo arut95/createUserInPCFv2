@@ -29,8 +29,6 @@ import com.createUser.domain.UserEntity;
 import com.createUser.domain.UserRequest;
 import com.createUser.logger.ILogger;
 import com.createUser.logger.LoggerFactory;
-import com.createUser.services.EmailCreation;
-import com.createUser.services.UserCreationService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,11 +42,6 @@ public class UserController {
 	private static ILogger logger;
 	private UserEntity fUserEntity;
 	
-	@Autowired
-	private UserCreationService userservice;
-	
-	@Autowired
-	private EmailCreation emailservice;
 	
 	@Value("${welcomepalemailsubject}")
 	private String welcomepalemailsubject;
@@ -87,7 +80,7 @@ public class UserController {
 	{
 		logger = loggerFactory.getLoggerInstance();
 	}
-	
+/*
 	@ApiOperation(value ="Delete a particular user")
 	@RequestMapping(value = "/DeleteUser/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteUser(@PathVariable("id") Long id)
@@ -327,4 +320,5 @@ public class UserController {
 			return false;
 		}
 	}
+	*/
 }

@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.createUser.domain.UserEntity;
-import com.createUser.repositories.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -20,7 +19,7 @@ import org.mockito.Mockito;
 
 
 public class UserRepositoryTest {
-
+/*
 	private UserRepository userRepository;
 	@Before
 	public void setup() 
@@ -105,4 +104,5 @@ public class UserRepositoryTest {
 		lstUsers.add(u1);
 		return lstUsers;
 	}
+	*/
 }

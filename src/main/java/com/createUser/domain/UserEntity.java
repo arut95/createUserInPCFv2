@@ -2,95 +2,63 @@ package com.createUser.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-@Entity
-@Table(name="userentity")
 
 public class UserEntity implements Serializable{
 	
 	private static final long serialVersionUID = -3254406057751181181L;
 	
-	@Id
-    @GeneratedValue
     private Long id;
 	
-	@Column(name = "firstname", length =50)
 	private String firstname;
 	
-	@Column(name = "lastname",length =50)
 	private String lastname;
 	
-	@Column(name = "employeeid")
 	private Long employeeid;
 	
-	@Column(name = "employeeemailid",length =50)
 	private String employeeemailid;
 	
-	@Column(name = "supervisoremailid",length =50)
 	private String supervisoremailid;
 	
-	@Column(name = "department",length =50)
 	private String department;
 	
-	@Column(name = "proglanguage")
 	private String proglanguage;
 	
-	@Column(name = "phonenumber",length =15)
 	private String phonenumber;
 	
-	@Column(name = "timezone",length =50)
 	private String timezone;
 	
-	@Column(name = "uniqueid")
 	private String uniqueid;
 	
-	@Column(name = "activationstatus")
 	private String activationstatus;	
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "activationdate", nullable = true)
 	private Date  activationdate;
 	
-	@Column(name = "creationdate")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date  creationdate;	
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "lastmodifieddate", nullable = true)
 	private Date  lastmodifieddate;
 	
-	@Column(name = "numberofattempts")
 	private Integer numberofattempts;	
 	
-	@Column(name = "orgid")
 	private String  orgid;
 	
-	@Column(name = "proficiencylevel")
 	private String  proficiencylevel;
 	
-	@Column(name = "frameworks")
 	private String  frameworks;
 	
-	@Column(name = "linuxskill")
 	private String  linuxskill;
 	
-	@Column(name = "fullstackcompleted")
 	private String  fullstackcompleted;
 	
-	@Column(name = "fullstackskills")
 	private String  fullstackskills;
 	
-	@Column(name = "userthoughtstraning")
 	private String  userthoughtstraning;
 	
-	@Column(name = "usercommentstraining")
 	private String  usercommentstraining;
 	
 	public String getProficiencylevel() {

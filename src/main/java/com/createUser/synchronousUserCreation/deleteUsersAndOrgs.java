@@ -32,6 +32,7 @@ public class deleteUsersAndOrgs {
 
 	@Scheduled(fixedDelayString = "${fixedDelayDeleteAccountAndOrgInMilliseconds}")
 	public void delete_UsersAndOrgs() {
+		
 		String oAuthtoken = cloudUsrManageService.getAuthtokenforOrgCreation(oauthusername,oauthpassword,ApplicationConstants.OAUTHGRANTTYPE);
 		if(oAuthtoken !=null)
 			cloudUsrManageService.deleteUsersAndOrgs(oAuthtoken);

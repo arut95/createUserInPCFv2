@@ -13,15 +13,12 @@ import com.createUser.domain.TestUserRequest;
 import com.createUser.domain.UserEntity;
 import com.createUser.logger.ILogger;
 import com.createUser.logger.LoggerFactory;
-import com.createUser.services.UserCreationService;
 
 @RestController
 @RequestMapping("/Users")
 public class TestUserController {
 	
 	private static ILogger logger;	
-	@Autowired
-	private UserCreationService userservice;
 	
 	
 	public TestUserController(LoggerFactory loggerFactory)
@@ -74,7 +71,6 @@ public class TestUserController {
 			fUserEntity.setUserthoughtstraning(userRequest.userthoughtstraning);
 			fUserEntity.setUsercommentstraining(userRequest.usercommentstraining);			
 			System.out.println(fUserEntity.getFirstname());
-			userservice.saveOrUpdate(fUserEntity);
 			return "OK";
 			//UserEntity userEntity= userservice.saveOrUpdate(fUserEntity);
 			//HttpHeaders headers = new HttpHeaders();
