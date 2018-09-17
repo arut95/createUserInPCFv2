@@ -1,10 +1,1 @@
----
-applications:
-- name: CreateUserInPCF
-  memory: 1G
-  instances: 1     
-  services: [mysqldb,Create-user-in-PCF_Config,rabbitmqService]
-  env:
-   activeprofile: dev
-  path: ./target/createUserInPCF-0.0.1-SNAPSHOT.jar
-
+--- {}
