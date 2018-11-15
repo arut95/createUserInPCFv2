@@ -1,1 +1,7 @@
---- {}
+---
+applications:
+- name: createUserInPCFv2
+  memory: 1G
+  instances: 1
+  host: createUserInPCFv2
+  disk_quota: 1G
